@@ -19,7 +19,9 @@ featureNames = read.csv("UCI HAR Dataset/features.txt", sep="", header=FALSE)
 CombinedData <- rbind(TrainingData, TestingData)
 
 #Create a feature list that only has variables that are the mean or Std Dev of other variables
-featureList <- grep("mean|Mean|Std|std",featureNames[,2])
+
+featureList <- grep("mean\\(|std\\(",featureNames[,2])
+
 
 #Keep activity and subject (cols 562,563)
 featureList <- c(featureList,562,563)
@@ -46,7 +48,7 @@ colnames(CombinedData) <- featureNames$V2
   colnames(CombinedData) = gsub("std","StdDev",colnames(CombinedData)) 
   colnames(CombinedData) = gsub("-mean","Mean",colnames(CombinedData))
   colnames(CombinedData) = gsub("^(t)","timedomain50hz",colnames(CombinedData))
-  colnames(CombinedData) = gsub("^(f)","frequnecydomainFFT",colnames(CombinedData))
+  colnames(CombinedData) = gsub("^(f)","frequencydomainFFT",colnames(CombinedData))
   colnames(CombinedData) = gsub("([Gg]ravity)","Gravity",colnames(CombinedData))
   colnames(CombinedData) = gsub("([Bb]ody[Bb]ody|[Bb]ody)","Body",colnames(CombinedData))
   colnames(CombinedData) = gsub("[Gg]yro","Gyro",colnames(CombinedData))
@@ -74,8 +76,8 @@ colnames(tidy) [1] <- "activity"
 colnames(tidy) [2] <- "subject"
 
 #delete original Subject and Activity Columns, working from end of file 
-tidy[,90] = NULL
-tidy[,89] = NULL
+tidy[,length(colnames(tidy))] = NULL
+tidy[,length(colnames(tidy))] = NULL
 
 # Write tidy data file to disk
 write.table(tidy, "tidy.txt", row.names = FALSE)
