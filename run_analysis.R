@@ -43,7 +43,7 @@ colnames(CombinedData) <- featureNames$V2
 
   colnames(CombinedData) = gsub("\\()","",colnames(CombinedData))
   colnames(CombinedData) = gsub("\\-","",colnames(CombinedData))
-  colnames(CombinedData) = gsub("std$","StdDev",colnames(CombinedData)) 
+  colnames(CombinedData) = gsub("std","StdDev",colnames(CombinedData)) 
   colnames(CombinedData) = gsub("-mean","Mean",colnames(CombinedData))
   colnames(CombinedData) = gsub("^(t)","timedomain50hz",colnames(CombinedData))
   colnames(CombinedData) = gsub("^(f)","frequnecydomainFFT",colnames(CombinedData))
