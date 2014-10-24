@@ -64,7 +64,7 @@ for (i in  1:length(activityLabels[,1])) {
   CombinedData$activity <- gsub(i,activityLabels[i,2],CombinedData$activity)
 }
 
-# Create tidy data
+# Create tidy data set which is the mean of all variables grouped by activity and subject
 tidy <-aggregate(CombinedData, by=list(CombinedData$activity,CombinedData$subject), mean)
 
 #Rename Group 1 to Activity
